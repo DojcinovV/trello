@@ -15,7 +15,6 @@ import {
   BoardsButton,
   BoardsSpan,
 } from "./header.styles";
-
 import HomeIcon from "../../assets/home.svg";
 import TrelloIcon from "../../assets/trello.svg";
 import PlusIcon from "../../assets/plus.svg";
@@ -26,20 +25,16 @@ import { AddBoardDialog } from "./addBoardDialog";
 const Header = () => {
   const [anchorBoards, setAnchorBoards] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-
   const { boards } = useSelector((s) => s.boards);
   const history = useHistory();
-
   const handleClose = (id) => {
     setAnchorBoards(null);
     if (id.type !== "click" && id.type !== "keydown")
       history.push(`/boards/${id}`);
   };
-
   const handleClick = (event) => {
     setAnchorBoards(event.currentTarget);
   };
-
   const BoardsMenu = (
     <Menu
       getContentAnchorEl={null}
@@ -70,17 +65,16 @@ const Header = () => {
         <HeaderLeftPart>
           <BackToHomeLink href="/">
             <BackToHomeSpan>
-              <img src={HomeIcon} alt="back to home" />
+              <img src={HomeIcon} alt="Back to home" />
             </BackToHomeSpan>
           </BackToHomeLink>
           <BoardsButton
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}
-            name="tuka"
           >
             <BackToHomeSpan>
-              <img src={TrelloIcon} alt="trello" />
+              <img src={TrelloIcon} alt="Trello" />
             </BackToHomeSpan>
             <BoardsSpan>Boards</BoardsSpan>
           </BoardsButton>

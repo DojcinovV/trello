@@ -54,12 +54,13 @@ export const HomeMenuNavSpan = styled.span`
   display: flex;
   align-items: center;
   text-align: center;
-  color: #42526e;
+  color: ${(props) => (props.selected ? "#0079BF" : "#42526e")};
   margin-left: 10px;
 `;
 export const HomeMenuNavLink = styled.a`
   align-items: center;
-  background-color: transparent;
+  background-color: ${(props) =>
+    props.selected ? "rgb(222,237,243)" : "transparent"};
   border-radius: 4px;
   box-shadow: none;
   display: flex;
@@ -74,10 +75,11 @@ export const HomeMenuNavLink = styled.a`
   transition-timing-function: ease;
   cursor: pointer;
   &:hover {
-    background-color: rgba(9, 30, 66, 0.08);
+    background-color: ${(props) =>
+      props.selected ? "rgb(222,237,243)" : "rgba(9, 30, 66, 0.08)"};
     color: #091e42;
     ${HomeMenuNavSpan} {
-      color: #091e42;
+      color: ${(props) => (props.selected ? "" : "#091e42")};
     }
   }
 `;
@@ -139,7 +141,7 @@ export const BoardsUl = styled.ul`
   padding: 0;
 `;
 export const BoardsLi = styled.li`
-  width: 23.5%;
+  width: 23%;
   padding: 0;
   margin: 0 2% 2% 0;
   transform: translate(0);

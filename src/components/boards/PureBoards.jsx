@@ -3,7 +3,6 @@ import {
   MainContainer,
   MainContentContainer,
   HomeContainer,
-  HomeMenuContainer,
   HomeStickyContainer,
   AllBoardsContainer,
   StyledAvatar,
@@ -17,7 +16,6 @@ import {
   BoardTitle,
   CreateBoardTitle,
 } from "./boards.styles";
-import HomeMenuNavComponent from "./HomeMenuNav/HomeMenuNav.component";
 import { AddBoardDialog } from "../../components/header/addBoardDialog";
 
 const PureBoards = ({ boards, dialogOpen, setDialogOpen, history }) => {
@@ -58,9 +56,6 @@ const PureBoards = ({ boards, dialogOpen, setDialogOpen, history }) => {
       <MainContentContainer>
         <HomeContainer>
           <HomeStickyContainer>
-            <HomeMenuContainer>
-              <HomeMenuNavComponent history={history} />
-            </HomeMenuContainer>
             <AllBoardsContainer>
               <StickyContainer>
                 <div>

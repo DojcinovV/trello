@@ -9,13 +9,18 @@ import Boards from "./pages/boards/boards";
 export const ROUTES = [
   {
     path: "",
-    component: () => <Redirect to="boards"></Redirect>,
+    component: () => <Redirect to="dashboard"></Redirect>,
     exact: true,
   },
   {
-    path: "boards",
+    path: "dashboard",
     component: Boards,
+    exact: false,
+  },
+  {
+    path: "boards/:id",
     exact: true,
+    component: () => <h1>Media library item not found</h1>, // TODO: Add custom component for page not found,
   },
 ];
 
