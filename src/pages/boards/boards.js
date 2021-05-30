@@ -1,7 +1,8 @@
 import React from "react";
+import BoardsComponent from "../../components/boards";
 
 const Boards = () => {
-  return <div>Boards</div>;
+  return <BoardsComponent />;
 };
 
 export default Boards;

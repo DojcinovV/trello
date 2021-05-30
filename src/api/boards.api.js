@@ -8,4 +8,9 @@ export const boardsApi = {
     );
     return res;
   },
+  createBoard: async (name) => {
+    AuthParams.params.name = name;
+    const res = await API.post("boards", null, AuthParams);
+    return res;
+  },
 };

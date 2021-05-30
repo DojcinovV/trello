@@ -23,11 +23,12 @@ const boards = (state = initialState, { type, payload }) => {
         message: "Successfully fetched boards",
       };
     case BOARDS.GET_BOARDS_FAILED:
+    case BOARDS.CREATE_BOARD_FAILED:
       return {
         ...state,
         loading: false,
         error: true,
-        message: "Error fetching boards",
+        message: payload,
       };
     default:
       return state;

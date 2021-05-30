@@ -21,20 +21,23 @@ import TrelloIcon from "../../assets/trello.svg";
 import PlusIcon from "../../assets/plus.svg";
 import InfoIcon from "../../assets/info.svg";
 import NotificationIcon from "../../assets/notification.svg";
+import { AddBoardDialog } from "./addBoardDialog";
 
 const Header = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorBoards, setAnchorBoards] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const { boards } = useSelector((s) => s.boards);
   const history = useHistory();
 
   const handleClose = (id) => {
-    setAnchorEl(null);
+    setAnchorBoards(null);
     if (id.type !== "click" && id.type !== "keydown")
       history.push(`/boards/${id}`);
   };
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorBoards(event.currentTarget);
   };
 
   const BoardsMenu = (
@@ -49,12 +52,12 @@ const Header = () => {
         horizontal: "center",
       }}
       id="simple-menu"
-      anchorEl={anchorEl}
+      anchorEl={anchorBoards}
       keepMounted
-      open={Boolean(anchorEl)}
+      open={Boolean(anchorBoards)}
       onClose={handleClose}
     >
-      {boards.map((board, index) => (
+      {boards?.map((board, index) => (
         <MenuItem key={index} onClick={() => handleClose(board?.id)}>
           {board?.name}
         </MenuItem>
@@ -65,7 +68,7 @@ const Header = () => {
     <HeaderContainer>
       <HeaderInner>
         <HeaderLeftPart>
-          <BackToHomeLink>
+          <BackToHomeLink href="/">
             <BackToHomeSpan>
               <img src={HomeIcon} alt="back to home" />
             </BackToHomeSpan>
@@ -83,7 +86,7 @@ const Header = () => {
           </BoardsButton>
           {BoardsMenu}
         </HeaderLeftPart>
-        <StyledLink>
+        <StyledLink href="/">
           <LinkGifContainer>
             <img
               src="https://a.trellocdn.com/prgb/dist/images/header-logo-spirit.d947df93bc055849898e.gif"
@@ -94,9 +97,13 @@ const Header = () => {
         </StyledLink>
         <HeaderRightPart>
           <BoardsButton>
-            <BackToHomeSpan>
+            <BackToHomeSpan onClick={() => setDialogOpen(true)}>
               <img src={PlusIcon} alt="Create Board" />
             </BackToHomeSpan>
+            <AddBoardDialog
+              dialogOpen={dialogOpen}
+              setDialogOpen={setDialogOpen}
+            />
           </BoardsButton>
           <BoardsButton>
             <BackToHomeSpan>
