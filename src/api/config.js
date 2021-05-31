@@ -1,16 +1,23 @@
-import axios from "axios";
-
-export const API = axios.create({
-  baseURL: "https://api.trello.com/1",
-  responseType: "json",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-export const AuthParams = {
-  params: {
-    token: process.env.REACT_APP_API_TOKEN,
-    key: process.env.REACT_APP_API_KEY,
-  },
-};
+export function makeRequest(method, url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function () {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText,
+        });
+      }
+    };
+    xhr.onerror = function () {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText,
+      });
+    };
+    xhr.send();
+  });
+}

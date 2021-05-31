@@ -31,7 +31,7 @@ const PureAddBoardDialog = ({
         ></TextField>
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeDialog} color="primary">
+        <Button onClick={closeDialog} color="secondary" variant="contained">
           Cancel
         </Button>
         <Button

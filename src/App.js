@@ -15,6 +15,7 @@ function App() {
     // cleanup
     return () => {};
   }, [dispatch]);
+
   const app = (
     <>
       <BodyContainer>

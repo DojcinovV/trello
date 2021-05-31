@@ -5,6 +5,9 @@ const initialState = {
   loading: false,
   error: null,
   message: null,
+  board: {
+    name: null,
+  },
 };
 
 const boards = (state = initialState, { type, payload }) => {
@@ -21,6 +24,12 @@ const boards = (state = initialState, { type, payload }) => {
         boards: payload,
         error: false,
         message: "Successfully fetched boards",
+      };
+    case BOARDS.GET_BOARD_SUCCESSFULL:
+      return {
+        ...state,
+        loading: false,
+        board: payload,
       };
     case BOARDS.GET_BOARDS_FAILED:
     case BOARDS.CREATE_BOARD_FAILED:

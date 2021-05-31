@@ -16,7 +16,7 @@ import HomeIcon from "@material-ui/icons/Home";
 
 const HomeMenuNavComponent = ({ history, location }) => {
   const [tab, setTab] = useState(location.pathname.split("/").slice(-1)[0]);
-  console.log("tab", tab);
+
   return (
     <HomeMenuNav>
       <div>
