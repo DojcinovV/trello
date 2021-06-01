@@ -21,4 +21,13 @@ export const boardsApi = {
       `${process.env.REACT_APP_API_URL}/boards/${id}?` + params
     );
   },
+  updateBoardName: async (id, name) => {
+    return makeRequest(
+      "PUT",
+      `${process.env.REACT_APP_API_URL}/boards/${id}?` +
+        params +
+        "&name=" +
+        name
+    );
+  },
 };

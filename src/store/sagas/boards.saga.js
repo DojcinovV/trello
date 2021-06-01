@@ -60,9 +60,22 @@ export function* handleGetSingleBoard(action) {
     },
   });
 }
+export function* handleUpdateBoardName(action) {
+  const { id, name } = action.payload;
+  yield boardsApi
+    .updateBoardName(id, name)
+    .then(function (data) {
+      console.log("data", data);
+    })
+    .catch(function (err) {
+      console.log("Augh, there was an error", err.statusText);
+    });
+  yield put({ type: BOARDS.GET_BOARD, payload: id });
+}
 
 export default function* watchBoards() {
   yield takeEvery(BOARDS.GET_BOARDS, handleGetBoards);
   yield takeEvery(BOARDS.CREATE_BOARD, handleCreateBoard);
   yield takeEvery(BOARDS.GET_BOARD, handleGetSingleBoard);
+  yield takeEvery(BOARDS.UPDATE_BOARD_NAME, handleUpdateBoardName);
 }

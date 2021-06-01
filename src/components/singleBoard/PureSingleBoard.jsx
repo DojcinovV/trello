@@ -1,5 +1,6 @@
 import React from "react";
 import BoardHeader from "./header/header.component";
+import BoardCanvasComponent from "./boardCanvas/boardCanvas.component";
 import {
   MainContainer,
   MainContentContainer,
@@ -18,7 +19,7 @@ const PureSingleBoard = ({ board }) => {
           <ContentContainer>
             <BoardMainContent>
               <BoardHeader board={board} />
-              <div>Board Canvas</div>
+              <BoardCanvasComponent />
             </BoardMainContent>
           </ContentContainer>
         </MainContentContainer>

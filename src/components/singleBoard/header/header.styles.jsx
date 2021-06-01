@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TextField from "@material-ui/core/TextField";
 
 export const HeaderContainer = styled.div`
   height: auto;
@@ -14,43 +15,17 @@ export const BoardNameLabel = styled.h3`
   margin: 0;
   padding: 0;
   color: #fff;
+  font-weight: 500;
 `;
-export const BoardNameContainer = styled.div`
-  background: hsla(0, 0%, 100%, 0.24);
-  cursor: default;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 32px;
-  padding: 0;
-  text-decoration: none;
-  max-width: calc(100% - 24px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border-radius: 3px;
-  color: #fff;
-  float: left;
-  height: 32px;
-  margin: 0 0 0 0;
-  cursor: pointer;
-  &:hover {
-    background: hsla(0, 0%, 100%, 0.32);
+export const BoardNameContainer = styled(TextField)`
+  .MuiInputBase-input {
+    color: white;
+    font-weight: bold;
   }
-`;
-export const BoardName = styled.h1`
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 32px;
-  padding: 0 12px;
-  margin: 0;
-`;
-export const BoardNameInput = styled.input`
-  display: none;
-  background-color: #fff;
-  border: 0;
-  font-weight: 700;
-  font-size: 18px;
-  height: 32px;
-  margin: 0;
-  padding: 0 12px;
+  .MuiInput-underline:before {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+  }
+  .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.38);
+  }
 `;
