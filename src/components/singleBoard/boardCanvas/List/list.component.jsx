@@ -6,6 +6,16 @@ import { boardsApi } from "../../../../api";
 
 const ListComponent = ({ title, listId, id }) => {
   const [cards, setCards] = useState([]);
+
+  const handleAddNewCard = (name) => {
+    const newCards = [...cards];
+    newCards.push({
+      name: name,
+      desc: "",
+    });
+    setCards(newCards);
+  };
+
   useEffect(() => {
     boardsApi
       .getCardsOnAList(listId, id)
@@ -14,6 +24,7 @@ const ListComponent = ({ title, listId, id }) => {
       })
       .catch(function (err) {});
   }, [setCards, listId, id]);
+
   return (
     <TrelloListContainer>
       <h3>{title} </h3>
@@ -22,7 +33,11 @@ const ListComponent = ({ title, listId, id }) => {
           <CardComponent key={index} text={card?.desc} name={card?.name} />
         );
       })}
-      <ActionButton id={id} />
+      <ActionButton
+        id={id}
+        listId={listId}
+        handleAddNewCard={handleAddNewCard}
+      />
     </TrelloListContainer>
   );
 };

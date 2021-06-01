@@ -92,6 +92,13 @@ export function* handleCreateListOnABoard(action) {
   yield put({ type: BOARDS.GET_LISTS_ON_A_BOARD, payload: id });
 }
 
+export function* handleCreateCardOnAList(action) {
+  const { name, listId } = action.payload;
+  yield boardsApi.createCardOnAList(listId, name).catch(function (err) {
+    console.log("Auth, there was an error", err.statusText);
+  });
+}
+
 export default function* watchBoards() {
   yield takeEvery(BOARDS.GET_BOARDS, handleGetBoards);
   yield takeEvery(BOARDS.CREATE_BOARD, handleCreateBoard);
@@ -99,4 +106,5 @@ export default function* watchBoards() {
   yield takeEvery(BOARDS.UPDATE_BOARD_NAME, handleUpdateBoardName);
   yield takeEvery(BOARDS.GET_LISTS_ON_A_BOARD, handleGetListsOnABoard);
   yield takeEvery(BOARDS.CREATE_LIST_ON_A_BOARD, handleCreateListOnABoard);
+  yield takeEvery(BOARDS.CREATE_CARD_ON_A_LIST, handleCreateCardOnAList);
 }

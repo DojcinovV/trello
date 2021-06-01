@@ -51,4 +51,15 @@ export const boardsApi = {
         name
     );
   },
+  createCardOnAList: async (idList, name) => {
+    return makeRequest(
+      "POST",
+      `${process.env.REACT_APP_API_URL}/cards?` +
+        params +
+        "&idList=" +
+        idList +
+        "&name=" +
+        name
+    );
+  },
 };

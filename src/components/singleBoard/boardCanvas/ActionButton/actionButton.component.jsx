@@ -12,23 +12,37 @@ import {
 } from "./actionButton.styles";
 import Textarea from "react-textarea-autosize";
 
-const ActionButton = ({ list, id }) => {
+const ActionButton = ({ list, id, listId, handleAddNewCard }) => {
   const [formOpen, setFormOpen] = useState(false);
   const [text, setText] = useState("");
   const dispatch = useDispatch();
 
-  const handleOnButtonClick = () => {
+  const handleAddList = () => {
     if (text) {
       let data = {
         name: text,
         id: id,
       };
       dispatch({ type: BOARDS.CREATE_LIST_ON_A_BOARD, payload: data });
+      setText("");
+    }
+  };
+
+  const handleAddCard = () => {
+    if (text) {
+      let data = {
+        name: text,
+        id: id,
+        listId: listId,
+      };
+      dispatch({ type: BOARDS.CREATE_CARD_ON_A_LIST, payload: data });
+      handleAddNewCard(text);
+      setText("");
     }
   };
 
   const handleOnBlur = () => {
-    setTimeout(() => setFormOpen(false), 100);
+    setTimeout(() => setFormOpen(false), 150);
   };
 
   const renderAddButton = () => {
@@ -67,7 +81,10 @@ const ActionButton = ({ list, id }) => {
           />
         </CardContainer>
         <FormButtonGroup>
-          <ButtonContainer variant="contained" onClick={handleOnButtonClick}>
+          <ButtonContainer
+            variant="contained"
+            onClick={() => (list ? handleAddList() : handleAddCard())}
+          >
             {buttonTitle}
           </ButtonContainer>
           <CloseIcon style={{ marginLeft: "0", cursor: "pointer" }}>
