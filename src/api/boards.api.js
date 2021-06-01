@@ -30,4 +30,25 @@ export const boardsApi = {
         name
     );
   },
+  getListsOnABoard: async (id) => {
+    return makeRequest(
+      "GET",
+      `${process.env.REACT_APP_API_URL}/boards/${id}/lists?` + params
+    );
+  },
+  getCardsOnAList: async (id) => {
+    return makeRequest(
+      "GET",
+      `${process.env.REACT_APP_API_URL}/lists/${id}/cards?` + params
+    );
+  },
+  createListOnABoard: async (id, name) => {
+    return makeRequest(
+      "POST",
+      `${process.env.REACT_APP_API_URL}/boards/${id}/lists?` +
+        params +
+        "&pos=bottom&name=" +
+        name
+    );
+  },
 };

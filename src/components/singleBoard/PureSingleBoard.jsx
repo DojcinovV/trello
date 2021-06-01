@@ -8,7 +8,7 @@ import {
   BoardMainContent,
 } from "./singleBoards.styles";
 
-const PureSingleBoard = ({ board }) => {
+const PureSingleBoard = ({ board, lists, id }) => {
   return (
     <>
       <MainContainer
@@ -18,8 +18,8 @@ const PureSingleBoard = ({ board }) => {
         <MainContentContainer>
           <ContentContainer>
             <BoardMainContent>
-              <BoardHeader board={board} />
-              <BoardCanvasComponent />
+              <BoardHeader board={board} id={id} />
+              <BoardCanvasComponent lists={lists} id={id} />
             </BoardMainContent>
           </ContentContainer>
         </MainContentContainer>

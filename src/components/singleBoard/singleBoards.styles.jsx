@@ -23,7 +23,6 @@ export const ContentContainer = styled.div`
   flex-grow: 1;
 `;
 export const BoardMainContent = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
   margin-right: 0;

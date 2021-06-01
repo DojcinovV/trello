@@ -9,6 +9,7 @@ const initialState = {
     name: null,
     background: null,
     backgroundImage: null,
+    lists: [],
   },
 };
 
@@ -19,6 +20,17 @@ const boards = (state = initialState, { type, payload }) => {
         ...state,
         loading: true,
       };
+    case BOARDS.GET_BOARD_SUCCESSFULL:
+      return {
+        ...state,
+        loading: false,
+        board: {
+          ...state.board,
+          name: payload.name,
+          background: payload.background,
+          backgroundImage: payload.backgroundImage,
+        },
+      };
     case BOARDS.GET_BOARDS_SUCCESSFULL:
       return {
         ...state,
@@ -27,11 +39,12 @@ const boards = (state = initialState, { type, payload }) => {
         error: false,
         message: "Successfully fetched boards",
       };
-    case BOARDS.GET_BOARD_SUCCESSFULL:
+
+    case BOARDS.GET_LISTS_ON_A_BOARD_SUCCESSFULL:
       return {
         ...state,
         loading: false,
-        board: payload,
+        board: { ...state.board, lists: payload },
       };
     case BOARDS.GET_BOARDS_FAILED:
     case BOARDS.CREATE_BOARD_FAILED:

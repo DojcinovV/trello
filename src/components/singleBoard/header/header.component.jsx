@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+
 import {
   HeaderContainer,
   BoardNameLabelContainer,
@@ -9,10 +9,10 @@ import {
 } from "./header.styles";
 import { BOARDS } from "../../../constants";
 
-const BoardHeader = ({ board }) => {
+const BoardHeader = ({ board, id }) => {
   const [boardName, setBoardName] = useState("");
   const dispatch = useDispatch();
-  const { id } = useParams();
+
   useEffect(() => {
     setBoardName(board.name);
   }, [board, setBoardName]);

@@ -62,15 +62,34 @@ export function* handleGetSingleBoard(action) {
 }
 export function* handleUpdateBoardName(action) {
   const { id, name } = action.payload;
+  yield boardsApi.updateBoardName(id, name).catch(function (err) {
+    console.log("Augh, there was an error", err.statusText);
+  });
+  yield put({ type: BOARDS.GET_BOARD, payload: id });
+}
+
+export function* handleGetListsOnABoard(action) {
+  let result = [];
   yield boardsApi
-    .updateBoardName(id, name)
+    .getListsOnABoard(action.payload)
     .then(function (data) {
-      console.log("data", data);
+      result = JSON.parse(data);
     })
     .catch(function (err) {
       console.log("Augh, there was an error", err.statusText);
     });
-  yield put({ type: BOARDS.GET_BOARD, payload: id });
+  yield put({
+    type: BOARDS.GET_LISTS_ON_A_BOARD_SUCCESSFULL,
+    payload: result,
+  });
+}
+
+export function* handleCreateListOnABoard(action) {
+  const { id, name } = action.payload;
+  yield boardsApi.createListOnABoard(id, name).catch(function (err) {
+    console.log("Auth, there was an error", err.statusText);
+  });
+  yield put({ type: BOARDS.GET_LISTS_ON_A_BOARD, payload: id });
 }
 
 export default function* watchBoards() {
@@ -78,4 +97,6 @@ export default function* watchBoards() {
   yield takeEvery(BOARDS.CREATE_BOARD, handleCreateBoard);
   yield takeEvery(BOARDS.GET_BOARD, handleGetSingleBoard);
   yield takeEvery(BOARDS.UPDATE_BOARD_NAME, handleUpdateBoardName);
+  yield takeEvery(BOARDS.GET_LISTS_ON_A_BOARD, handleGetListsOnABoard);
+  yield takeEvery(BOARDS.CREATE_LIST_ON_A_BOARD, handleCreateListOnABoard);
 }
