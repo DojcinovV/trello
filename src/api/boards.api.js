@@ -62,4 +62,13 @@ export const boardsApi = {
         name
     );
   },
+  updateListName: async (listId, name) => {
+    return makeRequest(
+      "PUT",
+      `${process.env.REACT_APP_API_URL}/lists/${listId}?` +
+        params +
+        "&name=" +
+        name
+    );
+  },
 };

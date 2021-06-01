@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import TextField from "@material-ui/core/TextField";
 
 export const HeaderContainer = styled.div`
   height: auto;
@@ -11,21 +10,24 @@ export const HeaderContainer = styled.div`
 export const BoardNameLabelContainer = styled.div`
   margin-right: 10px;
 `;
-export const BoardNameLabel = styled.h3`
+export const BoardNameLabel = styled.h1`
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 32px;
+  padding: 0 12px;
   margin: 0;
-  padding: 0;
-  color: #fff;
-  font-weight: 500;
 `;
-export const BoardNameContainer = styled(TextField)`
-  .MuiInputBase-input {
-    color: white;
-    font-weight: bold;
+export const BoardNameContainer = styled.div`
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 3px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.16);
   }
-  .MuiInput-underline:before {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
-  }
-  .MuiInput-underline:hover:not(.Mui-disabled):before {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.38);
-  }
+`;
+export const BoardNameTitle = styled.h1`
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 32px;
+  padding: 0 12px;
+  margin: 0;
 `;

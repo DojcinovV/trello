@@ -99,6 +99,13 @@ export function* handleCreateCardOnAList(action) {
   });
 }
 
+export function* handleUpdateListName(action) {
+  const { name, listId } = action.payload;
+  yield boardsApi.updateListName(listId, name).catch(function (err) {
+    console.log("Auth, there wasan eror", err.statusText);
+  });
+}
+
 export default function* watchBoards() {
   yield takeEvery(BOARDS.GET_BOARDS, handleGetBoards);
   yield takeEvery(BOARDS.CREATE_BOARD, handleCreateBoard);
@@ -107,4 +114,5 @@ export default function* watchBoards() {
   yield takeEvery(BOARDS.GET_LISTS_ON_A_BOARD, handleGetListsOnABoard);
   yield takeEvery(BOARDS.CREATE_LIST_ON_A_BOARD, handleCreateListOnABoard);
   yield takeEvery(BOARDS.CREATE_CARD_ON_A_LIST, handleCreateCardOnAList);
+  yield takeEvery(BOARDS.UPDATE_LIST_NAME, handleUpdateListName);
 }
