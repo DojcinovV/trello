@@ -7,6 +7,11 @@ export const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  height: calc(100vh - 40px);
+  background-color: ${(props) => props.background};
+  background-image: ${(props) => `url(${props.backgroundImage})`};
+  background-position: 50%;
+  background-size: cover;
 `;
 export const MainContentContainer = styled.div`
   display: flex;

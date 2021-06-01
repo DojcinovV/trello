@@ -7,14 +7,17 @@ import {
   BoardMainContent,
 } from "./singleBoards.styles";
 
-const PureSingleBoard = () => {
+const PureSingleBoard = ({ board }) => {
   return (
     <>
-      <MainContainer>
+      <MainContainer
+        background={board.background}
+        backgroundImage={board.backgroundImage}
+      >
         <MainContentContainer>
           <ContentContainer>
             <BoardMainContent>
-              <BoardHeader />
+              <BoardHeader board={board} />
               <div>Board Canvas</div>
             </BoardMainContent>
           </ContentContainer>

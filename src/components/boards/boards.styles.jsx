@@ -22,14 +22,14 @@ export const HomeStickyContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 export const HomeMenuContainer = styled.div`
   position: relative;
   top: 0px;
 `;
 export const HomeMenuNav = styled.nav`
-  margin: 40px 0 0;
+  margin: 40px auto 0 auto;
   padding: 0 16px;
   width: 240px;
 `;

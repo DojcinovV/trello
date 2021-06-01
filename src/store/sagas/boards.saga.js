@@ -47,7 +47,17 @@ export function* handleGetSingleBoard(action) {
     });
   yield put({
     type: BOARDS.GET_BOARD_SUCCESSFULL,
-    payload: { name: result.name },
+    payload: {
+      name: result.name,
+      background:
+        result.prefs.backgroundImage === null
+          ? result.prefs.backgroundColor
+          : null,
+      backgroundImage:
+        result.prefs.backgroundImage === null
+          ? null
+          : result.prefs.backgroundImageScaled[8].url,
+    },
   });
 }
 

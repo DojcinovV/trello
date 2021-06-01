@@ -7,6 +7,8 @@ const initialState = {
   message: null,
   board: {
     name: null,
+    background: null,
+    backgroundImage: null,
   },
 };
 
