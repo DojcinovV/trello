@@ -1,5 +1,4 @@
-import { makeRequest } from "./config";
-var params = `key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_API_TOKEN}`;
+import { makeRequest, params } from "./config";
 
 export const boardsApi = {
   getBoards: async () => {
@@ -77,6 +76,19 @@ export const boardsApi = {
       `${process.env.REACT_APP_API_URL}/lists/${listId}/closed?` +
         params +
         "&value=true"
+    );
+  },
+  getCardAttachment: async (cardId, attachmentId) => {
+    return makeRequest(
+      "GET",
+      `${process.env.REACT_APP_API_URL}/cards/${cardId}/attachments/${attachmentId}?` +
+        params
+    );
+  },
+  deleteCard: async (cardId) => {
+    return makeRequest(
+      "DELETE",
+      `${process.env.REACT_APP_API_URL}/cards/${cardId}?` + params
     );
   },
 };

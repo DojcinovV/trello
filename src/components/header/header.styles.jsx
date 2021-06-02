@@ -33,7 +33,7 @@ export const StyledLink = styled(Link)`
 export const LinkGifContainer = styled.div`
   width: 80px;
   height: 16px;
-  margin: 7px 0;
+  margin: 3px 0;
   position: relative;
   opacity: 0.5;
   &:hover {

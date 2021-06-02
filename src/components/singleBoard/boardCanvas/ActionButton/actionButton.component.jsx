@@ -30,12 +30,6 @@ const ActionButton = ({ list, id, listId, handleAddNewCard }) => {
 
   const handleAddCard = () => {
     if (text) {
-      let data = {
-        name: text,
-        id: id,
-        listId: listId,
-      };
-      dispatch({ type: BOARDS.CREATE_CARD_ON_A_LIST, payload: data });
       handleAddNewCard(text);
       setText("");
     }

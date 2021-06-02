@@ -19,8 +19,8 @@ export const ROUTES = [
     exact: false,
   },
   {
-    path: "boards/:id",
-    exact: true,
+    path: "boards/:id/lists",
+    exact: false,
     component: SingleBoard,
   },
 ];

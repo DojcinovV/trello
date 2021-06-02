@@ -7,6 +7,7 @@ import {
   TrelloListHeaderContainer,
   DeleteIconContainer,
 } from "./list.styles";
+import Tooltip from "@material-ui/core/Tooltip";
 import { boardsApi } from "../../../../api";
 import Textarea from "react-textarea-autosize";
 import { BOARDS } from "../../../../constants";
@@ -27,12 +28,26 @@ const ListComponent = ({ title, listId, id }) => {
       .catch(function (err) {});
   }, [setCards, listId, id]);
 
-  const handleAddNewCard = (name) => {
+  const handleAddNewCard = async (name) => {
     const newCards = [...cards];
-    newCards.push({
-      name: name,
-      desc: "",
-    });
+    await boardsApi
+      .createCardOnAList(listId, name)
+      .then(function (card) {
+        newCards.push(JSON.parse(card));
+      })
+      .catch(function (err) {
+        console.log("Auth, there was an error", err.statusText);
+      });
+    setCards(newCards);
+  };
+
+  const handleDeleteCard = (cardId) => {
+    const newCards = cards.filter((card) => card.id !== cardId);
+    const data = {
+      boardId: id,
+      cardId: cardId,
+    };
+    dispatch({ type: BOARDS.DELETE_CARD, payload: data });
     setCards(newCards);
   };
 
@@ -76,23 +91,34 @@ const ListComponent = ({ title, listId, id }) => {
   };
 
   const renderTitle = () => {
-    return <h3 onClick={() => setFormOpen(true)}>{formText}</h3>;
+    return (
+      <Tooltip title="Click To Edit List Name">
+        <h3 onClick={() => setFormOpen(true)}>{formText}</h3>
+      </Tooltip>
+    );
   };
 
   return (
     <TrelloListContainer>
       <TrelloListHeaderContainer>
         {formOpen ? renderForm() : renderTitle()}
-        <span
-          style={{ width: "42px", height: "42px" }}
-          onClick={handleDeleteList}
-        >
-          <DeleteIconContainer />
-        </span>
+        <Tooltip title="Delete List">
+          <span
+            style={{ width: "42px", height: "42px" }}
+            onClick={handleDeleteList}
+          >
+            <DeleteIconContainer />
+          </span>
+        </Tooltip>
       </TrelloListHeaderContainer>
       {cards?.map((card, index) => {
         return (
-          <CardComponent key={index} text={card?.desc} name={card?.name} />
+          <CardComponent
+            key={index}
+            card={card}
+            boardId={id}
+            handleDeleteCard={handleDeleteCard}
+          />
         );
       })}
       <ActionButton

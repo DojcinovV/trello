@@ -30,7 +30,7 @@ const Header = () => {
   const handleClose = (id) => {
     setAnchorBoards(null);
     if (id.type !== "click" && id.type !== "keydown")
-      history.push(`/boards/${id}`);
+      history.push(`/boards/${id}/lists`);
   };
   const handleClick = (event) => {
     setAnchorBoards(event.currentTarget);

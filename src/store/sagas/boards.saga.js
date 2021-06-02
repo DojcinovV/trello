@@ -113,6 +113,13 @@ export function* handleDeleteList(action) {
   });
   yield put({ type: BOARDS.GET_LISTS_ON_A_BOARD, payload: boardId });
 }
+export function* handleDeleteCard(action) {
+  const { cardId, boardId } = action.payload;
+  yield boardsApi.deleteCard(cardId).catch(function (err) {
+    console.log("Auth, there wasan eror", err.statusText);
+  });
+  yield put({ type: BOARDS.GET_LISTS_ON_A_BOARD, payload: boardId });
+}
 
 export default function* watchBoards() {
   yield takeEvery(BOARDS.GET_BOARDS, handleGetBoards);
@@ -121,8 +128,8 @@ export default function* watchBoards() {
   yield takeEvery(BOARDS.UPDATE_BOARD_NAME, handleUpdateBoardName);
   yield takeEvery(BOARDS.GET_LISTS_ON_A_BOARD, handleGetListsOnABoard);
   yield takeEvery(BOARDS.CREATE_LIST_ON_A_BOARD, handleCreateListOnABoard);
-  yield takeEvery(BOARDS.CREATE_CARD_ON_A_LIST, handleCreateCardOnAList);
   yield takeEvery(BOARDS.UPDATE_LIST_NAME, handleUpdateListName);
   yield takeEvery(BOARDS.UPDATE_LIST_NAME, handleUpdateListName);
   yield takeEvery(BOARDS.DELETE_LIST, handleDeleteList);
+  yield takeEvery(BOARDS.DELETE_CARD, handleDeleteCard);
 }

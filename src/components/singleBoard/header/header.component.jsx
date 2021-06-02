@@ -9,6 +9,7 @@ import {
 } from "./header.styles";
 import { BOARDS } from "../../../constants";
 import Textarea from "react-textarea-autosize";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const BoardHeader = ({ board, id }) => {
   const [boardName, setBoardName] = useState("");
@@ -41,7 +42,9 @@ const BoardHeader = ({ board, id }) => {
   const renderTitle = () => {
     return (
       <BoardNameContainer onClick={() => setOpenForm(true)}>
-        <BoardNameTitle>{boardName}</BoardNameTitle>
+        <Tooltip title="Click to edit Board Name">
+          <BoardNameTitle>{boardName}</BoardNameTitle>
+        </Tooltip>
       </BoardNameContainer>
     );
   };

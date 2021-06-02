@@ -25,7 +25,7 @@ const PureBoards = ({ boards, dialogOpen, setDialogOpen, history }) => {
         return (
           <BoardsLi
             key={index}
-            onClick={() => history.push(`/boards/${board?.id}`)}
+            onClick={() => history.push(`/boards/${board?.id}/lists`)}
           >
             <StyledBoardsLink
               url={

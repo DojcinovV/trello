@@ -21,3 +21,5 @@ export function makeRequest(method, url) {
     xhr.send();
   });
 }
+
+export const params = `key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_API_TOKEN}`;
