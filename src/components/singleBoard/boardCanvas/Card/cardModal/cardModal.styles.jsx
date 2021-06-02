@@ -7,9 +7,13 @@ export const ModalContainer = styled(Modal)`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 10px;
 `;
 export const ContentContainer = styled.div`
   background-color: #f1f2f5;
+  max-height: 100%;
+  overflow: auto;
 `;
 export const DialogIconCloseContainer = styled.div`
   border-radius: 50%;
