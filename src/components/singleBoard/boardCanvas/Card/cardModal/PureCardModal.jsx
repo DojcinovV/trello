@@ -36,6 +36,11 @@ const PureCardModal = ({
   card,
   comments,
   handleDeleteCard,
+  handleDeleteComment,
+  handleAddComment,
+  text,
+  setText,
+  onKeyDown,
 }) => {
   const renderImage = () => {
     return cardAttachmentUrl ? (
@@ -64,7 +69,9 @@ const PureCardModal = ({
         <CommentActionsContainer>
           <CommentActions>Edit</CommentActions>
           <CommentActions></CommentActions>
-          <CommentActions>Delete</CommentActions>
+          <CommentActions onClick={() => handleDeleteComment(comment?.id)}>
+            Delete
+          </CommentActions>
         </CommentActionsContainer>
       </div>
     );
@@ -112,11 +119,11 @@ const PureCardModal = ({
                       <InputMessage
                         type="text"
                         placeholder="Write a comment."
-                        // onChange={}
-                        // onKeyDown={}
-                        // value={}
+                        onChange={(e) => setText(e.target.value)}
+                        onKeyDown={onKeyDown}
+                        value={text}
                       ></InputMessage>
-                      <StlButton>
+                      <StlButton onClick={handleAddComment}>
                         <StlSendIcon />
                       </StlButton>
                     </InputForm>
