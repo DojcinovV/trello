@@ -8,7 +8,7 @@ const CardComponent = ({ text, name }) => {
   return (
     <CardContainer>
       <CardContent>
-        <Typography gutterBottom>{text === "" ? name : text}</Typography>
+        <Typography gutterBottom>{name}</Typography>
       </CardContent>
     </CardContainer>
   );

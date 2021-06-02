@@ -71,4 +71,12 @@ export const boardsApi = {
         name
     );
   },
+  deleteList: async (listId) => {
+    return makeRequest(
+      "PUT",
+      `${process.env.REACT_APP_API_URL}/lists/${listId}/closed?` +
+        params +
+        "&value=true"
+    );
+  },
 };

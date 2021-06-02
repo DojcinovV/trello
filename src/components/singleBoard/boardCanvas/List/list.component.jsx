@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CardComponent from "../Card/card.component";
 import ActionButton from "../ActionButton/actionButton.component";
-import { TrelloListContainer } from "./list.styles";
+import {
+  TrelloListContainer,
+  TrelloListHeaderContainer,
+  DeleteIconContainer,
+} from "./list.styles";
 import { boardsApi } from "../../../../api";
 import Textarea from "react-textarea-autosize";
 import { BOARDS } from "../../../../constants";
@@ -51,6 +55,13 @@ const ListComponent = ({ title, listId, id }) => {
     }
   };
 
+  const handleDeleteList = () => {
+    dispatch({
+      type: BOARDS.DELETE_LIST,
+      payload: { listId: listId, boardId: id },
+    });
+  };
+
   const renderForm = () => {
     return (
       <Textarea
@@ -70,7 +81,15 @@ const ListComponent = ({ title, listId, id }) => {
 
   return (
     <TrelloListContainer>
-      {formOpen ? renderForm() : renderTitle()}
+      <TrelloListHeaderContainer>
+        {formOpen ? renderForm() : renderTitle()}
+        <span
+          style={{ width: "42px", height: "42px" }}
+          onClick={handleDeleteList}
+        >
+          <DeleteIconContainer />
+        </span>
+      </TrelloListHeaderContainer>
       {cards?.map((card, index) => {
         return (
           <CardComponent key={index} text={card?.desc} name={card?.name} />
