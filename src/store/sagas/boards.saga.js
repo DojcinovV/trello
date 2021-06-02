@@ -121,6 +121,13 @@ export function* handleDeleteCard(action) {
   yield put({ type: BOARDS.GET_LISTS_ON_A_BOARD, payload: boardId });
 }
 
+export function* handleUpdateCard(action) {
+  const { cardId, cardField, text } = action.payload;
+  yield boardsApi.updateCard(cardId, cardField, text).catch(function (err) {
+    console.log("Auth, there wasan eror", err.statusText);
+  });
+}
+
 export default function* watchBoards() {
   yield takeEvery(BOARDS.GET_BOARDS, handleGetBoards);
   yield takeEvery(BOARDS.CREATE_BOARD, handleCreateBoard);
@@ -132,4 +139,5 @@ export default function* watchBoards() {
   yield takeEvery(BOARDS.UPDATE_LIST_NAME, handleUpdateListName);
   yield takeEvery(BOARDS.DELETE_LIST, handleDeleteList);
   yield takeEvery(BOARDS.DELETE_CARD, handleDeleteCard);
+  yield takeEvery(BOARDS.UPDATE_CARD, handleUpdateCard);
 }

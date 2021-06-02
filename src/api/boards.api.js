@@ -78,6 +78,14 @@ export const boardsApi = {
         "&value=true"
     );
   },
+  updateCard: async (cardId, cardField, text) => {
+    return makeRequest(
+      "PUT",
+      `${process.env.REACT_APP_API_URL}/cards/${cardId}?` +
+        params +
+        `&${cardField}=${text}`
+    );
+  },
   getCardAttachment: async (cardId, attachmentId) => {
     return makeRequest(
       "GET",

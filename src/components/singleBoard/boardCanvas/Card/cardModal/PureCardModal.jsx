@@ -41,6 +41,14 @@ const PureCardModal = ({
   text,
   setText,
   onKeyDown,
+  renderDescForm,
+  renderDescTitle,
+  openDescForm,
+  setOpenDescForm,
+  renderTitleForm,
+  renderTitle,
+  openTitleForm,
+  setOpenTitleForm,
 }) => {
   const renderImage = () => {
     return cardAttachmentUrl ? (
@@ -92,6 +100,7 @@ const PureCardModal = ({
       <Fade in={open}>
         <ContentContainer>
           {renderImage()}
+          {openTitleForm ? renderTitleForm() : renderTitle()}
           <WindowHeader>
             <SectionTitleHeader>Code Review</SectionTitleHeader>
           </WindowHeader>
@@ -100,13 +109,12 @@ const PureCardModal = ({
               <DescriptionTitleContainer>
                 <WindowHeader>
                   <SectionTitleHeader>Description</SectionTitleHeader>
-                  <div>
+                  <div onClick={() => setOpenDescForm(true)}>
                     <EditDescription>Edit</EditDescription>
                   </div>
                 </WindowHeader>
-                <WindowHeader>
-                  {card?.desc === "" ? "No Description" : card?.desc}
-                </WindowHeader>
+
+                {openDescForm ? renderDescForm() : renderDescTitle()}
                 <WindowHeader>
                   <SectionTitleHeader>Activity</SectionTitleHeader>
                 </WindowHeader>

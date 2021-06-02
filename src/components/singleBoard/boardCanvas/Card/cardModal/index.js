@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { COMMENTS } from "../../../../../constants";
+import { COMMENTS, BOARDS } from "../../../../../constants";
 import PureCardModal from "./PureCardModal";
+import Textarea from "react-textarea-autosize";
+import { WindowHeader } from "./cardModal.styles";
+
+import Button from "@material-ui/core/Button";
 
 const CardModalComponent = ({
   open,
@@ -9,9 +13,15 @@ const CardModalComponent = ({
   cardAttachmentUrl,
   card,
   handleDeleteCard,
+  renderTitleForm,
+  renderTitle,
+  openTitleForm,
+  setOpenTitleForm,
 }) => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
+  const [openDescForm, setOpenDescForm] = useState(false);
+  const [descText, setDescText] = useState(card?.desc ?? "");
 
   useEffect(() => {
     if (open) {
@@ -49,6 +59,58 @@ const CardModalComponent = ({
     }
   };
 
+  const handleEditDesc = () => {
+    if (descText !== card?.desc) {
+      dispatch({
+        type: BOARDS.UPDATE_CARD,
+        payload: { text: descText, cardId: card?.id, cardField: "desc" },
+      });
+    } else if (descText === "") {
+      setOpenDescForm(card?.desc);
+    }
+    setOpenDescForm(false);
+  };
+
+  const onDescKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      handleEditDesc();
+    }
+  };
+
+  const renderDescForm = () => {
+    return (
+      <>
+        <WindowHeader>
+          <Textarea
+            autoFocus
+            onKeyDown={onDescKeyDown}
+            value={descText}
+            onChange={(e) => setDescText(e.target.value)}
+            style={{ resize: "none", width: "100%" }}
+          />
+        </WindowHeader>
+        <WindowHeader>
+          <Button variant="contained" color="primary" onClick={handleEditDesc}>
+            Save
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setOpenDescForm(false)}
+            style={{ marginLeft: "20px" }}
+          >
+            Cancel
+          </Button>
+        </WindowHeader>
+      </>
+    );
+  };
+
+  const renderDescTitle = () => {
+    return <WindowHeader>{descText}</WindowHeader>;
+  };
+
   return (
     <PureCardModal
       open={open}
@@ -62,6 +124,14 @@ const CardModalComponent = ({
       setText={setText}
       text={text}
       onKeyDown={onKeyDown}
+      renderDescForm={renderDescForm}
+      renderDescTitle={renderDescTitle}
+      openDescForm={openDescForm}
+      setOpenDescForm={setOpenDescForm}
+      renderTitleForm={renderTitleForm}
+      renderTitle={renderTitle}
+      openTitleForm={openTitleForm}
+      setOpenTitleForm={setOpenTitleForm}
     />
   );
 };
