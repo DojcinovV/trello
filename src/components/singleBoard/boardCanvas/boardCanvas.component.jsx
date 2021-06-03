@@ -34,7 +34,7 @@ const BoardCanvasComponent = ({ lists, id }) => {
     );
     let newpos;
     if (result.destination.index === 0) {
-      newpos = 1;
+      newpos = orderedLists[result.destination.index].pos - 10;
     } else if (result.destination.index === orderedLists.length - 1) {
       const rndInt = Math.floor(Math.random() * (100000 - 1 + 1) + 1);
       newpos = orderedLists[result.destination.index].pos + rndInt;
