@@ -70,6 +70,15 @@ export const boardsApi = {
         name
     );
   },
+  updateListPos: async (listId, pos) => {
+    return makeRequest(
+      "PUT",
+      `${process.env.REACT_APP_API_URL}/lists/${listId}?` +
+        params +
+        "&pos=" +
+        pos
+    );
+  },
   deleteList: async (listId) => {
     return makeRequest(
       "PUT",

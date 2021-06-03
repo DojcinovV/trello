@@ -106,6 +106,13 @@ export function* handleUpdateListName(action) {
   });
 }
 
+export function* handleUpdateListPos(action) {
+  const { pos, listId } = action.payload;
+  yield boardsApi.updateListPos(listId, pos).catch(function (err) {
+    console.log("Auth, there was an error", err.statusText);
+  });
+}
+
 export function* handleDeleteList(action) {
   const { listId, boardId } = action.payload;
   yield boardsApi.deleteList(listId).catch(function (err) {
@@ -136,7 +143,7 @@ export default function* watchBoards() {
   yield takeEvery(BOARDS.GET_LISTS_ON_A_BOARD, handleGetListsOnABoard);
   yield takeEvery(BOARDS.CREATE_LIST_ON_A_BOARD, handleCreateListOnABoard);
   yield takeEvery(BOARDS.UPDATE_LIST_NAME, handleUpdateListName);
-  yield takeEvery(BOARDS.UPDATE_LIST_NAME, handleUpdateListName);
+  yield takeEvery(BOARDS.UPDATE_LIST_POS, handleUpdateListPos);
   yield takeEvery(BOARDS.DELETE_LIST, handleDeleteList);
   yield takeEvery(BOARDS.DELETE_CARD, handleDeleteCard);
   yield takeEvery(BOARDS.UPDATE_CARD, handleUpdateCard);

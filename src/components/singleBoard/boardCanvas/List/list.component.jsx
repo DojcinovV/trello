@@ -11,8 +11,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { boardsApi } from "../../../../api";
 import Textarea from "react-textarea-autosize";
 import { BOARDS } from "../../../../constants";
+import { Draggable } from "react-beautiful-dnd";
 
-const ListComponent = ({ title, listId, id }) => {
+const ListComponent = ({ title, listId, id, index }) => {
   const [cards, setCards] = useState([]);
   const [formOpen, setFormOpen] = useState(false);
   const [formText, setFormText] = useState(title);
@@ -99,34 +100,42 @@ const ListComponent = ({ title, listId, id }) => {
   };
 
   return (
-    <TrelloListContainer>
-      <TrelloListHeaderContainer>
-        {formOpen ? renderForm() : renderTitle()}
-        <Tooltip title="Delete List">
-          <span
-            style={{ width: "42px", height: "42px" }}
-            onClick={handleDeleteList}
-          >
-            <DeleteIconContainer />
-          </span>
-        </Tooltip>
-      </TrelloListHeaderContainer>
-      {cards?.map((card, index) => {
-        return (
-          <CardComponent
-            key={index}
-            card={card}
-            boardId={id}
-            handleDeleteCard={handleDeleteCard}
+    <Draggable draggableId={listId} index={index}>
+      {(provided) => (
+        <TrelloListContainer
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          {...provided.dragHandleProps}
+        >
+          <TrelloListHeaderContainer>
+            {formOpen ? renderForm() : renderTitle()}
+            <Tooltip title="Delete List">
+              <span
+                style={{ width: "42px", height: "42px" }}
+                onClick={handleDeleteList}
+              >
+                <DeleteIconContainer />
+              </span>
+            </Tooltip>
+          </TrelloListHeaderContainer>
+          {cards?.map((card, key) => {
+            return (
+              <CardComponent
+                key={key}
+                card={card}
+                boardId={id}
+                handleDeleteCard={handleDeleteCard}
+              />
+            );
+          })}
+          <ActionButton
+            id={id}
+            listId={listId}
+            handleAddNewCard={handleAddNewCard}
           />
-        );
-      })}
-      <ActionButton
-        id={id}
-        listId={listId}
-        handleAddNewCard={handleAddNewCard}
-      />
-    </TrelloListContainer>
+        </TrelloListContainer>
+      )}
+    </Draggable>
   );
 };
 
